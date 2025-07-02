@@ -38,4 +38,33 @@ mean_face = X_train.mean(axis=0)
 X_train_centred = X_train - mean_face 
 X_test_centred = X_test - mean_face
 
-print("Mean of centered data:", X_train_centred.mean(axis=0).mean())
+# print("Mean of centered data:", X_train_centred.mean(axis=0).mean())
+
+C = np.dot(X_train_centred, np.transpose(X_train_centred))
+
+eigenvalues, eigenvectors = np.linalg.eigh(C)
+descending_indices = np.flip(np.argsort(eigenvalues))
+sorted_eigenvalues = eigenvalues[descending_indices]
+sorted_eigenvectors = eigenvectors[:, descending_indices]
+
+eigenface = X_train_centred.T @ sorted_eigenvectors[0]
+
+magnitude = np.linalg.norm(eigenface)
+normalised_eigenface = eigenface / magnitude
+
+
+'''
+normalised_eigenface_2d = normalised_eigenface.reshape(64, 64)
+plt.imshow(normalised_eigenface_2d, cmap='gray')
+plt.axis('off')
+plt.show()
+'''
+
+
+# Calculate cumulative variance explained
+total_variance = np.sum(sorted_eigenvalues)
+cumulative_variance = np.cumsum(sorted_eigenvalues) / total_variance
+
+# Find how many components for 95% variance
+n_components = np.argmax(cumulative_variance >= 0.95) + 1
+print(f"Need {n_components} eigenfaces for 95% variance")
