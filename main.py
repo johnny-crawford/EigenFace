@@ -51,7 +51,8 @@ for i in range(n_eigenfaces):
 
 
 
-coefficients = X_train_centred @ eigenfaces.T
+train_projections = X_train_centred @ eigenfaces.T
+test_projections = X_test_centred @eigenfaces.T
 
-
-
+def recognize_face(test_projection, train_projections, train_labels):
+    pass
