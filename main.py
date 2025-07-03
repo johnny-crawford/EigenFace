@@ -1,3 +1,13 @@
+"""
+Eigenface Face Recognition Implementation
+
+This module implements the classical Eigenface algorithm for face recognition
+using Principal Component Analysis (PCA) on the Olivetti faces dataset.
+
+Author: Johnny Crawford
+Date: 03/07/2025
+"""
+
 import sklearn.datasets
 import numpy as np
 import matplotlib.pyplot as plt
@@ -116,7 +126,7 @@ def main():
     print(f"Overall accuracy: {accuracy * 100:.1f}%")
     print(f"Correctly recognized: {np.sum(predictions == y_test)} out of {len(y_test)} faces")
 
-# This is the Python idiom for "run this code if this file is executed directly"
+
 if __name__ == "__main__":
     main()
 
