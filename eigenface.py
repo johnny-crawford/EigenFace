@@ -102,6 +102,7 @@ def recognise_faces(test_projections, train_projections, y_train):
 
 def visualise_mean_face(mean_face, save=True):
     # Display and save the average face
+
     plt.figure(figsize=(6, 6))
     plt.imshow(mean_face.reshape(64, 64), cmap='gray')
     plt.title('Average Face', fontsize=16)
@@ -113,6 +114,7 @@ def visualise_mean_face(mean_face, save=True):
 
 def visualise_eigenfaces(eigenfaces, n_show=20, save=True):
     # Display and save grid of eigenfaces
+    
     n_rows = 4
     n_cols = 5
     fig, axes = plt.subplots(n_rows, n_cols, figsize=(12, 10))
