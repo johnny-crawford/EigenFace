@@ -100,16 +100,46 @@ def recognise_faces(test_projections, train_projections, y_train):
 
     return np.array(predictions)
 
+def visualise_mean_face(mean_face):
+    # Display the average face
+    plt.figure(figsize=(6, 6))
+    plt.imshow(mean_face.reshape(64, 64), cmap='gray')
+    plt.title('Average Face', fontsize=16)
+    plt.axis('off')
+    plt.show()
+
+def visualise_eigenfaces(eigenfaces, n_show=20):
+    # Display grid of eigenfaces
+    n_rows = 4
+    n_cols = 5
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(12, 10))
+    axes = axes.flatten()
+    
+    for i in range(min(n_show, len(eigenfaces))):
+        eigenface_2d = eigenfaces[i].reshape(64, 64)
+        axes[i].imshow(eigenface_2d, cmap='gray')
+        axes[i].set_title(f'Eigenface {i+1}')
+        axes[i].axis('off')
+    
+    plt.suptitle('Top 20 Eigenfaces', fontsize=16)
+    plt.tight_layout()
+    plt.show()
+
 def main():
     # Step 1: Load and split data
     print("Loading Olivetti faces dataset...")
     X_train, X_test, y_train, y_test = load_and_split_data()
     print(f"Loaded {len(X_train)} training and {len(X_test)} test images")
     
-    # Step 2: Compute eigenfaces from training data only
+    # Step 2: Create eigenfaces from training data only
     print("\nComputing eigenfaces...")
     eigenfaces, mean_face, eigenvalues = create_eigenfaces(X_train, n_components=50)
     print(f"Computed {len(eigenfaces)} eigenfaces")
+
+    # Visualize mean face and eigenfaces
+    print("\nVisualizing results...")
+    visualise_mean_face(mean_face)
+    visualise_eigenfaces(eigenfaces)
     
     # Step 3: Project both training and test data
     print("\nProjecting faces onto eigenspace...")
@@ -126,6 +156,14 @@ def main():
     print(f"Overall accuracy: {accuracy * 100:.1f}%")
     print(f"Correctly recognized: {np.sum(predictions == y_test)} out of {len(y_test)} faces")
 
+    # Show which people were hard to recognize
+    print("\nPer-person accuracy:")
+    for person in range(n_subjects):
+        person_mask = (y_test == person)
+        if np.any(person_mask):
+            person_accuracy = np.mean(predictions[person_mask] == person)
+            if person_accuracy < 1.0:
+                print(f"  Person {person}: {person_accuracy*100:.0f}%")
 
 if __name__ == "__main__":
     main()
