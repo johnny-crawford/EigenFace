@@ -100,11 +100,14 @@ where C is the covariance matrix, v are eigenvectors (eigenfaces), and λ are ei
 
 ## Future Improvements
 
- Implement k-NN classification instead of 1-NN
- Add support for real-time face recognition via webcam
- Compare with modern deep learning approaches (FaceNet, VGGFace)
- Add data augmentation for improved robustness
- Implement LDA (Linear Discriminant Analysis) for comparison
+- Implement k-NN classification instead of 1-NN
+- Add performance metrics
+- Implement face reconstruction
+- Experiment with components
+- Add support for real-time face recognition via webcam
+- Compare with modern deep learning approaches (FaceNet, VGGFace)
+- Add data augmentation for improved robustness
+- Implement LDA (Linear Discriminant Analysis) for comparison
 
 ## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
