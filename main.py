@@ -3,25 +3,50 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-faces = sklearn.datasets.fetch_olivetti_faces()
+def load_and_split_data(n_train_per_person=8):
 
-training_indices = []
-for person_id in range(40):  # 40 people
-    for image_num in range(8):  # first 8 images
-        training_index = person_id * 10 + image_num
-        training_indices.append(training_index)
+    """
+    Load Olivetti dataset and split into training/test sets.
+    
+    Parameters:
+    -----------
+    n_train_per_person : int
+        Number of training images per person (default: 8)
+        
+    Returns:
+    --------
+    X_train : array, shape (320, 4096)
+        Training face images
+    X_test : array, shape (80, 4096)
+        Test face images
+    y_train : array, shape (320,)
+        Training labels
+    y_test : array, shape (80,)
+        Test labels
+    """
 
-test_indices = []
-for person_id in range(40):  # 40 people
-    for image_num in range(8, 10):  # last 2 images
-        test_index = person_id * 10 + image_num
-        test_indices.append(test_index)
+    faces = sklearn.datasets.fetch_olivetti_faces()
 
-X_train = faces.data[training_indices]
-X_test = faces.data[test_indices]
+    training_indices = []
+    for person_id in range(40): 
+        for image_num in range(n_train_per_person): 
+            training_index = person_id * 10 + image_num
+            training_indices.append(training_index)
 
-Y_train = faces.target[training_indices]
-Y_test = faces.target[test_indices]
+    test_indices = []
+    for person_id in range(40):
+        for image_num in range(n_train_per_person, 10): 
+            test_index = person_id * 10 + image_num
+            test_indices.append(test_index)
+
+    X_train = faces.data[training_indices]
+    X_test = faces.data[test_indices]
+
+    y_train = faces.target[training_indices]
+    y_test = faces.target[test_indices]
+
+    return X_train, X_test, y_train, y_test
+
 
 mean_face = X_train.mean(axis=0)
 
@@ -62,17 +87,11 @@ for i in range(80):
 
     distances = np.linalg.norm(train_projections - test_proj, axis=1)
     closest_idx = np.argmin(distances)
-    predicted_person = Y_train[closest_idx]
+    predicted_person = y_train[closest_idx]
 
     predictions.append(predicted_person)
 
 predictions = np.array(predictions)
 
 
-accuracy = np.mean(predictions == Y_test)
-print(f"Overall accuracy: {accuracy * 100:.1f}%")
-
-# Confusion analysis
-print(f"Correctly recognized: {np.sum(predictions == Y_test)} out of 80 faces")
-print(f"Misrecognized: {np.sum(predictions != Y_test)} faces")
 
