@@ -75,9 +75,11 @@ Correctly recognized: 71 out of 80 faces
 ## Project Structure
 ```bash
 eigenface-recognition/
-├── eigenface.py          # Main implementation
-├── README.md            # Project documentation
-├── requirements.txt     # Python dependencies
+├── eigenface.py        # Main implementation
+├── README.md           # Project documentation
+├── requirements.txt    # Python dependencies
+├── LICENSE             # MIT License
+├── .gitignore         
 └── results/            # Output visualizations
     ├── mean_face.png
     └── eigenfaces_grid.png
