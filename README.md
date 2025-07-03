@@ -86,10 +86,10 @@ eigenface-recognition/
 ```
 ## How It Works
 
- Data Preprocessing: Center face images by subtracting the mean face
- PCA Computation: Calculate covariance matrix and find eigenvectors
- Dimensionality Reduction: Project faces onto top k eigenvectors (eigenfaces)
- Recognition: Classify test faces using nearest neighbor in reduced space
+ 1. Data Preprocessing: Center face images by subtracting the mean face
+ 2. PCA Computation: Calculate covariance matrix and find eigenvectors
+ 3. Dimensionality Reduction: Project faces onto top k eigenvectors (eigenfaces)
+ 4. Recognition: Classify test faces using nearest neighbor in reduced space
 
 ## Mathematical Foundation
 The algorithm computes eigenfaces by solving:
