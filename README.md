@@ -43,7 +43,7 @@ This project implements face recognition using eigenfaces, a classical computer 
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/eigenface-recognition.git
+git clone https://github.com/johnny-crawford/EigenFace
 cd eigenface-recognition
 
 # Install dependencies
