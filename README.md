@@ -43,14 +43,18 @@ This project implements face recognition using eigenfaces, a classical computer 
 
 ```bash
 # Clone the repository
-git clone https://github.com/johnny-crawford/EigenFace.git
+git clone https://github.com/yourusername/eigenface-recognition.git
 cd eigenface-recognition
 
 # Install dependencies
 pip install -r requirements.txt
-Usage
-bashpython eigenface.py
-Example Output:
+```
+## Usage
+```bash
+python eigenface.py
+```
+```bash
+## Example Output:
 Loading Olivetti faces dataset...
 Loaded 320 training and 80 test images
 
@@ -67,7 +71,9 @@ Performing face recognition...
 Results:
 Overall accuracy: 88.8%
 Correctly recognized: 71 out of 80 faces
-Project Structure
+```
+## Project Structure
+```bash
 eigenface-recognition/
 ├── eigenface.py          # Main implementation
 ├── README.md            # Project documentation
@@ -75,24 +81,22 @@ eigenface-recognition/
 └── results/            # Output visualizations
     ├── mean_face.png
     └── eigenfaces_grid.png
+```
+## How It Works
 
-How It Works
+ Data Preprocessing: Center face images by subtracting the mean face
+ PCA Computation: Calculate covariance matrix and find eigenvectors
+ Dimensionality Reduction: Project faces onto top k eigenvectors (eigenfaces)
+ Recognition: Classify test faces using nearest neighbor in reduced space
 
-Data Preprocessing: Center face images by subtracting the mean face
-PCA Computation: Calculate covariance matrix and find eigenvectors
-Dimensionality Reduction: Project faces onto top k eigenvectors (eigenfaces)
-Recognition: Classify test faces using nearest neighbor in reduced space
-
-Mathematical Foundation
+## Mathematical Foundation
 The algorithm computes eigenfaces by solving:
+```bash
 C·v = λ·v
+```
 where C is the covariance matrix, v are eigenvectors (eigenfaces), and λ are eigenvalues.
-Performance Analysis
-The recognition accuracy varies with the number of eigenfaces used:
-<div align="center">
-  <img src="results/accuracy_vs_components.png" width="500" alt="Performance Analysis">
-</div>
-Future Improvements
+
+## Future Improvements
 
  Implement k-NN classification instead of 1-NN
  Add support for real-time face recognition via webcam
@@ -100,16 +104,16 @@ Future Improvements
  Add data augmentation for improved robustness
  Implement LDA (Linear Discriminant Analysis) for comparison
 
-Contributing
+## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
-License
+## License
 This project is licensed under the MIT License - see the LICENSE file for details.
-Acknowledgments
+## Acknowledgments
 
 Olivetti faces dataset from AT&T Laboratories Cambridge
 Original Eigenface paper: Turk, M., & Pentland, A. (1991). "Eigenfaces for recognition"
 
-Contact
+## Contact
 Johnny Crawford - https://www.linkedin.com/in/johnny-crawford/ - j.craw1306@gmail.com
 
 If you found this project helpful, please consider giving it a star!
