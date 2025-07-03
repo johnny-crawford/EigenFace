@@ -100,16 +100,19 @@ def recognise_faces(test_projections, train_projections, y_train):
 
     return np.array(predictions)
 
-def visualise_mean_face(mean_face):
-    # Display the average face
+def visualise_mean_face(mean_face, save=True):
+    # Display and save the average face
     plt.figure(figsize=(6, 6))
     plt.imshow(mean_face.reshape(64, 64), cmap='gray')
     plt.title('Average Face', fontsize=16)
     plt.axis('off')
+    
+    if save:
+        plt.savefig('results/mean_face.png', dpi=150, bbox_inches='tight')
     plt.show()
 
-def visualise_eigenfaces(eigenfaces, n_show=20):
-    # Display grid of eigenfaces
+def visualise_eigenfaces(eigenfaces, n_show=20, save=True):
+    # Display and save grid of eigenfaces
     n_rows = 4
     n_cols = 5
     fig, axes = plt.subplots(n_rows, n_cols, figsize=(12, 10))
@@ -123,6 +126,9 @@ def visualise_eigenfaces(eigenfaces, n_show=20):
     
     plt.suptitle('Top 20 Eigenfaces', fontsize=16)
     plt.tight_layout()
+    
+    if save:
+        plt.savefig('results/eigenfaces_grid.png', dpi=150, bbox_inches='tight')
     plt.show()
 
 def main():
